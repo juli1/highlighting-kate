@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd">
+
+<!-- Authors: Julien Delange -->
+<!-- Copyright: BSD copyright -->
+<!-- Ported to Kate 2.0/ KWrite 4.0 by Joseph Wenninger (Updated by Simon Robins)-->
+
+<language name="aadl" version="0.1" kateversion="2.4" section="Modeling" extensions="*.aadl;*.aadl2" mimetype="text/aadl">
+  <highlighting>
+    <list name="types">
+      <item>processor</item>
+      <item>abstract</item>
+      <item>bus</item>
+      <item>device</item>
+      <item>process</item>
+      <item>data</item>
+      <item>system</item>
+      <item>port</item>
+      <item>event</item>
+      <item>virtual</item>
+	</list>
+
+	<list name="Component Definition">
+      <item>modes</item>
+      <item>mode</item>
+      <item>features</item>
+      <item>connections</item>
+      <item>subcomponents</item>
+      <item>properties</item>
+      <item>annex</item>
+      <item>flows</item>
+	</list>
+
+	<list name="keywords">
+      <item>=></item>
+      <item>public</item>
+      <item>with</item>
+      <item>implementation</item>
+      <item>private</item>
+      <item>package</item>
+      <item>end</item>
+    </list>
+
+    <list name="directions">
+      <item>in</item>
+      <item>out</item>
+    </list>
+
+
+    <contexts>
+      <context name = "Base" attribute = "Normal Text" lineEndContext="#stay">
+			<keyword attribute="Keyword" context="#stay" String="keywords"/>
+			<keyword attribute="Component Type" context="#stay" String="types"/>
+			<keyword attribute="Component Def" context="#stay" String="Component Definition"/>
+			<!--
+			<DetectChar attribute="Property Def" context="PropertyDefinition" char="{" lookAhead="true" />
+        <RegExpr attribute="Property Def" context="Property Definition" String=".*=>.*$" endRegion="region" firstNonSpace="false"/>
+			-->
+        <Detect2Chars attribute="Comment Section" context="Comment Context" char="-" char1="-"/>
+		 </context>
+
+      <context name = "Comment Context" attribute = "Normal Text" lineEndContext="#pop">
+	   </context>
+
+      <context name = "Property Definition" attribute = "Property Def" lineEndContext="#stay">
+			<DetectChar attribute="Property Def" context="#pop" char="}" lookAhead="true" />
+			<DetectChar attribute="Property Def" context="#pop" char="}" lookAhead="true" />
+	   </context>
+
+    </contexts>
+
+    <itemDatas>
+      <itemData name = "Normal Text" defStyleNum = "dsNormal"/>
+      <itemData name="InnerProperty" defStyleNum="dsBaseN" color="green"/>
+      <itemData name = "Keyword" defStyleNum = "dsKeyword"/>
+      <itemData name = "Comment" defStyleNum = "dsComment" color="blue" selColor="red"/>
+      <itemData name = "Property Def" defStyleNum = "dsRegionMarker" color="blue" selColor="red"/>
+      <itemData name = "Comment Section" defStyleNum = "dsComment" selColor="yellow"/>
+      <itemData name = "Region Marker" defStyleNum="dsRegionMarker" color="blue"/>
+		<itemData name="Component Type" defStyleNum="dsKeyword" bold="1" selColor="red" color="#439402"/>
+		<itemData name="Component Def"  defStyleNum="dsDataType"  bold="1" selColor="blue" color="#449855"/>
+    </itemDatas>
+
+  </highlighting>
+
+  <general>
+    <comments>
+	<comment name="singleLine" start="--" />
+    </comments>
+    <keywords casesensitive="0"/>
+  </general>
+
+</language>
